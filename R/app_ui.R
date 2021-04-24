@@ -122,7 +122,7 @@ golem_add_external_resources <- function(){
       app_title = 'Lettermobile head 2'
     )
 
-    # for example, you can add shinyalert::useShinyalert() 
+    ## for example, you can add shinyalert::useShinyalert() 
 
   )
 }

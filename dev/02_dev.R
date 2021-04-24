@@ -85,7 +85,7 @@ usethis::use_appveyor_badge()
 # Circle CI
 usethis::use_circleci()
 usethis::use_circleci_badge()
-
+# 
 # Jenkins
 usethis::use_jenkins()
 
