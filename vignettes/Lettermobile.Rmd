@@ -17,3 +17,10 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(Lettermobile)
 ```
+
+### A shinyMobile App interface to the komaletter library.
+
+Create paramterized pdf letters in different formats (DIN, US,JAPAN) for multiple recipients. 
+
+### Dependencies:
+
