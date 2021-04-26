@@ -22,6 +22,7 @@ app_ui <- function(request) {
         shinyMobile::f7Tabs(
           animated = TRUE,
           id= "tabs",
+        ## first tab SENDER::
         shinyMobile::f7Tab(
             tabName= "Sender",
             icon = shinyMobile::f7Icon("person"),
@@ -33,18 +34,12 @@ app_ui <- function(request) {
             f7Text("send.email","",placeholder = "your.mail@domain.com"),
             f7Text("send.phone","",value = "324 124 5564")
             )),
+        ##### Second tab RECIPIENTS::
         shinyMobile::f7Tab(
-          tabName= "Recipient",
+          tabName= "Recipients",
           icon = shinyMobile::f7Icon("person_3_fill"),
           active = TRUE,
-          # shinyMobile::f7Fabs(
-          #   extended = TRUE,
-          #   position = "right-bottom",
-          #   color = "green",
-          #   sideOpen = "left",
-          #   inset=TRUE,
-          #   shinyMobile::f7Stepper("step",label =shinyMobile::f7Icon("person_crop_circle_badge_plus") ,1,10,1,1)
-          # ),
+          ### Accordion with conditional additional recipients
           shinyMobile::f7Accordion(
             id = "myaccordion1",
             f7AccordionItem(
@@ -58,6 +53,7 @@ app_ui <- function(request) {
               )),
               open = FALSE
             ),
+            conditionalPanel(condition = "input.step2 > 1",
             f7AccordionItem(
               id= "R1",
               title =shinyMobile::f7Icon("person_badge_plus"),
@@ -69,8 +65,21 @@ app_ui <- function(request) {
                 f7Text("e2.phone","",placeholder = "324 124 5564")
               )),
               open = FALSE
-            ),
-            conditionalPanel(condition = "input.step2 >= 3",
+            )%>% f7Skeleton(effect = "fade", duration = 5)),
+            conditionalPanel(condition = "input.step2 > 2",
+                             f7AccordionItem(
+                               id= "R1",
+                               title =shinyMobile::f7Icon("person_badge_plus"),
+                               f7Block( f7Card(
+                                 f7Text("e3.name","Recipient 2", placeholder="Christine Choe"),
+                                 f7Text("e3.adr1","",placeholder= "Straße Hausnummer"),
+                                 f7Text("e3.adr2","",placeholder = "12345 Ort"),
+                                 f7Text("e3.email","",placeholder = "your.mail@domain.com"),
+                                 f7Text("e3.phone","",placeholder = "324 124 5564")
+                               )),
+                               open = FALSE
+                             )%>% f7Skeleton(effect = "fade", duration = 5)),
+            conditionalPanel(condition = "input.step2 > 3",
             f7AccordionItem(
               id= "R2",
               title =shinyMobile::f7Icon("person_badge_plus"),
@@ -82,8 +91,8 @@ app_ui <- function(request) {
                 f7Text("e4.phone","",placeholder = "324 124 5564")
               )),
               open = FALSE
-            ),
-            conditionalPanel(condition = "input.step2 >= 4",
+            )%>% f7Skeleton(effect = "fade", duration = 5)),
+            conditionalPanel(condition = "input.step2 > 4",
                              f7AccordionItem(
                                id= "R2",
                                title =shinyMobile::f7Icon("person_badge_plus"),
@@ -95,10 +104,23 @@ app_ui <- function(request) {
                                  f7Text("e4.phone","",placeholder = "324 124 5564")
                                )),
                                open = FALSE
-                             )%>% f7Skeleton(effect = "fade", duration = 5))
+                             )%>% f7Skeleton(effect = "fade", duration = 3.5)),
+            conditionalPanel(condition = "input.step2 > 5",
+                             f7AccordionItem(
+                               id= "R2",
+                               title =shinyMobile::f7Icon("person_badge_plus"),
+                               f7Block( f7Card(
+                                 f7Text("e4.name","Recipient 4", placeholder="Mike Dachs"),
+                                 f7Text("e4.adr1","",placeholder= "Straße Hausnummer"),
+                                 f7Text("e4.adr2","",placeholder = "12345 Ort"),
+                                 f7Text("e4.email","",placeholder = "your.mail@domain.com"),
+                                 f7Text("e4.phone","",placeholder = "324 124 5564")
+                               )),
+                               open = FALSE)%>% f7Skeleton(effect = "fade", duration = 5))
             
           ),
-        shinyMobile::f7Stepper("step2",label =shinyMobile::f7Icon("person_crop_circle_badge_plus") ,1,10,3,1)),
+          ### input stepper number of recipients "step2"
+        shinyMobile::f7Stepper("step2",label =shinyMobile::f7Icon("person_crop_circle_badge_plus") ,1,6,1,1)),
         shinyMobile::f7Tab(
           tabName= "Letter Settings",
           icon = shinyMobile::f7Icon("doc_text_fill"),
