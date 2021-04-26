@@ -44,7 +44,7 @@ app_ui <- function(request) {
           shinyMobile::f7Accordion(
             id = "myaccordion1",
             f7AccordionItem(
-              title =verbatimTextOutput("value"),
+              title =shinyMobile::f7Icon("person_badge"),
               f7Block( f7Card(
                 f7Text("e1.name","Recipient 1", "John Doe"),
                 f7Text("e1.adr1","",placeholder= "Straße Hausnummer"),

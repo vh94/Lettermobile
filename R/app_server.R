@@ -11,7 +11,7 @@ app_server <- function( input, output, session ) {
   observeEvent(input$togglePopup3, {f7TogglePopup(id = "pop3")})
   observeEvent(input$toggleSheet, {updateF7Sheet(id = "Sheet")})
   
-####  use a module!
+####  use a module! or glue
   Emp_Data = reactive({
       df <- data.frame(Name=c(input$e1.name,input$e2.name,input$e3.name,input$e4.name,input$e5.name,input$e6.name),
                        adr1=c(input$e1.adr1,input$e2.adr1,input$e3.adr1,input$e4.adr1,input$e5.adr1,input$e6.adr1),

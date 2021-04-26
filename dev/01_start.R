@@ -44,7 +44,7 @@ usethis::use_git()
 
 ## Use packages ----
 usethis::use_package("shinyMobile")
-usethis::use_package("komaletter")
+
 
 ## Init Testing Infrastructure ----
 ## Create a template for tests
