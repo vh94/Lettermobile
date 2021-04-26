@@ -128,7 +128,9 @@ app_ui <- function(request) {
           active = TRUE,
         f7Block( f7Card( shinyMobile::f7DatePicker("Dt",label = "Choose Date:"),
           shinyMobile::f7Text("sub",label="Subject:",placeholder = "Concerning"),
-          shinyMobile::f7Text("greet",label="Greeting:",placeholder = "Dear")),
+          shinyMobile::f7Text("place",label="Place:",placeholder = "Mississippi"),
+          shinyMobile::f7Text("greet",label="Greeting:",placeholder = "Dear"),
+          shinyMobile::f7Text("closing",label="Closing",placeholder = "Dear")),
           f7Button( "togglePopup3", "Letter Content")),
           shinyMobile::f7Popup(
             id = "pop3",
@@ -143,14 +145,17 @@ app_ui <- function(request) {
           icon = shinyMobile::f7Icon("envelope_open_fill"),
           active = TRUE,
           f7Card(
-            verbatimTextOutput("value"),
             uiOutput('table')),
             f7Button("toggleSheet", "Layout options"),
+            f7Button("mrefresh", "Print Pdf"),
             shinyMobile::f7Sheet( id="Sheet",
                                   label = "More",
                                   backdrop = TRUE,
-                                  h2("Format"),
-                                  h3("coose Font"),
+                                  f7Card(
+                                  f7Select("lco",label="Format -Standard",list("DIN5008A", "NF","SN","UScommercial9","NipponEL")),
+                                  f7Select("lang",label="Language",list("de","en")),
+                                  f7Select("papersize",label="Papersize",choices = list("a4","letter"))
+                                  ),
                                   swipeHandler = TRUE)
         )
         )
