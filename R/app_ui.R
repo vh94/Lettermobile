@@ -49,29 +49,50 @@ app_ui <- function(request) {
             id = "myaccordion1",
             f7AccordionItem(
               title =shinyMobile::f7Icon("person"),
-              f7Block("Item 1 content"),
+              f7Block( f7Card(
+                f7Text("e1.name","Recipient 1", "John Doe"),
+                f7Text("e1.adr1","",placeholder= "Straße Hausnummer"),
+                f7Text("e1.adr2","",placeholder = "12345 Ort"),
+                f7Text("e1.email","",placeholder = "your.mail@domain.com"),
+                f7Text("e1.phone","",placeholder = "324 124 5564")
+              )),
               open = FALSE
             ),
             f7AccordionItem(
               id= "R1",
               title =shinyMobile::f7Icon("person_badge_plus"),
-              f7Text("Item 2 content","Write me!", "Whatchit!" )
+              f7Block( f7Card(
+                f7Text("e2.name","Recipient 2", placeholder="John Doe"),
+                f7Text("e2.adr1","",placeholder= "Straße Hausnummer"),
+                f7Text("e2.adr2","",placeholder = "12345 Ort"),
+                f7Text("e2.email","",placeholder = "your.mail@domain.com"),
+                f7Text("e2.phone","",placeholder = "324 124 5564")
+              )),
+              open = FALSE
             ),
             f7AccordionItem(
               id= "R2",
               title =shinyMobile::f7Icon("person_badge_plus"),
-              f7Text("Item 2 content","Write me!", "Whatchit!" )
-            )%>% f7Skeleton(effect = "pulse", duration = 5)
+              f7Block( f7Card(
+                f7Text("e1.name","Recipient 1", "John Doe"),
+                f7Text("e1.adr1","",placeholder= "Straße Hausnummer"),
+                f7Text("e1.adr2","",placeholder = "12345 Ort"),
+                f7Text("e1.email","",placeholder = "your.mail@domain.com"),
+                f7Text("e1.phone","",placeholder = "324 124 5564")
+              )),
+              open = FALSE
+            )%>% f7Skeleton(effect = "fade", duration = 5)
             
-          )),
+          ),
+          shinyMobile::f7Stepper("step2",label =shinyMobile::f7Icon("person_crop_circle_badge_plus") ,1,10,1,1)),
         shinyMobile::f7Tab(
           tabName= "Letter Settings",
           icon = shinyMobile::f7Icon("doc_text_fill"),
           active = TRUE,
          
-          f7Block( shinyMobile::f7DatePicker("Dt",label = "Choose Date:"),
+         f7Block( f7Card( shinyMobile::f7DatePicker("Dt",label = "Choose Date:"),
           shinyMobile::f7Text("sub",label="Subject:",placeholder = "Concerning"),
-          shinyMobile::f7Text("greet",label="Greeting:",placeholder = "Dear"),
+          shinyMobile::f7Text("greet",label="Greeting:",placeholder = "Dear")),
           f7Button( "togglePopup3", "Letter Content")),
           shinyMobile::f7Popup(
             id = "pop3",
