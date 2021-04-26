@@ -21,11 +21,11 @@
 golem::fill_desc(
   pkg_name = "Lettermobile", # The Name of the package containing the App 
   pkg_title = "LettRmobile", # The Title of the package containing the App 
-  pkg_description = "PKG_DESC.", # The Description of the package containing the App 
-  author_first_name = "AUTHOR_FIRST", # Your First Name
-  author_last_name = "AUTHOR_LAST", # Your Last Name
-  author_email = "AUTHOR@MAIL.COM", # Your Email
-  repo_url = NULL # The URL of the GitHub Repo (optional) 
+  pkg_description = "a shinyMobile interface to komaletter", # The Description of the package containing the App 
+  author_first_name = "Valentin", # Your First Name
+  author_last_name = "Haberl", # Your Last Name
+  author_email = "valentinhaberl94@gmail.com", # Your Email
+  repo_url = "https://github.com/vh94/Lettermobile" 
 )     
 
 ## Set {golem} options ----
