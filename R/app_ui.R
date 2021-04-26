@@ -39,11 +39,12 @@ app_ui <- function(request) {
           tabName= "Recipients",
           icon = shinyMobile::f7Icon("person_3_fill"),
           active = TRUE,
-          ### Accordion with conditional additional recipients
+          ### Accordion with conditional additional recipients, 
+          ### should probaly use modules
           shinyMobile::f7Accordion(
             id = "myaccordion1",
             f7AccordionItem(
-              title =shinyMobile::f7Icon("person_badge"),
+              title =verbatimTextOutput("value"),
               f7Block( f7Card(
                 f7Text("e1.name","Recipient 1", "John Doe"),
                 f7Text("e1.adr1","",placeholder= "Straße Hausnummer"),
@@ -97,11 +98,11 @@ app_ui <- function(request) {
                                id= "R2",
                                title =shinyMobile::f7Icon("person_badge_plus"),
                                f7Block( f7Card(
-                                 f7Text("e4.name","Recipient 4", placeholder="Mike Dachs"),
-                                 f7Text("e4.adr1","",placeholder= "Straße Hausnummer"),
-                                 f7Text("e4.adr2","",placeholder = "12345 Ort"),
-                                 f7Text("e4.email","",placeholder = "your.mail@domain.com"),
-                                 f7Text("e4.phone","",placeholder = "324 124 5564")
+                                 f7Text("e5.name","Recipient 4", placeholder="Mike Dachs"),
+                                 f7Text("e5.adr1","",placeholder= "Straße Hausnummer"),
+                                 f7Text("e5.adr2","",placeholder = "12345 Ort"),
+                                 f7Text("e5.email","",placeholder = "your.mail@domain.com"),
+                                 f7Text("e5.phone","",placeholder = "324 124 5564")
                                )),
                                open = FALSE
                              )%>% f7Skeleton(effect = "fade", duration = 3.5)),
@@ -110,11 +111,11 @@ app_ui <- function(request) {
                                id= "R2",
                                title =shinyMobile::f7Icon("person_badge_plus"),
                                f7Block( f7Card(
-                                 f7Text("e4.name","Recipient 4", placeholder="Mike Dachs"),
-                                 f7Text("e4.adr1","",placeholder= "Straße Hausnummer"),
-                                 f7Text("e4.adr2","",placeholder = "12345 Ort"),
-                                 f7Text("e4.email","",placeholder = "your.mail@domain.com"),
-                                 f7Text("e4.phone","",placeholder = "324 124 5564")
+                                 f7Text("e6.name","Recipient 4", placeholder="Mike Dachs"),
+                                 f7Text("e6.adr1","",placeholder= "Straße Hausnummer"),
+                                 f7Text("e6.adr2","",placeholder = "12345 Ort"),
+                                 f7Text("e6.email","",placeholder = "your.mail@domain.com"),
+                                 f7Text("e6.phone","",placeholder = "324 124 5564")
                                )),
                                open = FALSE)%>% f7Skeleton(effect = "fade", duration = 5))
             
@@ -141,6 +142,9 @@ app_ui <- function(request) {
           tabName= "PDF",
           icon = shinyMobile::f7Icon("envelope_open_fill"),
           active = TRUE,
+          f7Card(
+            verbatimTextOutput("value"),
+            uiOutput('table')),
             f7Button("toggleSheet", "Layout options"),
             shinyMobile::f7Sheet( id="Sheet",
                                   label = "More",
