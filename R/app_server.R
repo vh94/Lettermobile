@@ -2,7 +2,7 @@
 #' 
 #' @param input,output,session Internal parameters for {shiny}.  
 #'     DO NOT REMOVE.
-#' @import shiny shinyMobile komaletter
+#' @import shiny shinyMobile komaletter qpdf
 #' @noRd
 app_server <- function( input, output, session ) {
   # Your application server logic 
@@ -26,11 +26,12 @@ app_server <- function( input, output, session ) {
   output$table<-renderUI({f7Table(Emp_Data()$df)})
   
   ##  make an rmd file from the data and render using komaletter
+  ###     ! this should all run in \www dir : 
   observeEvent(input$mrefresh , { 
     pdfnames<-numeric(Emp_Data()$nr)
     for (i in 1:Emp_Data()$nr) {
       rmdname =gsub(" ","", x=paste0(Emp_Data()$df[i,1],Emp_Data()$df[i,3],".rmd"), fixed = TRUE)
-      pdfname = gsub(" ","", x=paste0("/inst/app/www/",Emp_Data()$df[i,1],Emp_Data()$df[i,3],".pdf"), fixed = TRUE)
+      pdfname = gsub(" ","", x=paste0(Emp_Data()$df[i,1],Emp_Data()$df[i,3],".pdf"), fixed = TRUE)
       empty<-""
       # use a gsubregex to make the filename
       writeBin(empty,rmdname)
@@ -54,12 +55,12 @@ app_server <- function( input, output, session ) {
                  "\npapersize: ", input$papersize,
                  "\noutput: komaletter::komaletter 
 --- \n",input$lettertext),file=rmdname)
-      rmarkdown::render(rmdname,"komaletter::komaletter", output_file = gsub(".rmd" ,".pdf",gsub("www/", "",rmdname)),envir = new.env(parent = globalenv()))
+      rmarkdown::render(rmdname,"komaletter::komaletter", output_file = pdfname,envir = new.env(parent = globalenv()))
       pdfnames[i]<-pdfname
       
     }
     
-    pdf_combine(paste0("www/",pdfnames), output = "www/joined.pdf")
+    pdf_combine(pdfnames, output = "www/joined.pdf")
     output$pdfview <- renderUI({
       tags$iframe(style="height:600px; width:100%", src="joined.pdf")
     })

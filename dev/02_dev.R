@@ -64,6 +64,7 @@ usethis::use_github()
 
 ## Use packages ----
 usethis::use_package("shinyMobile")
+usethis::use_package("qpdf")
 # GitHub Actions
 usethis::use_github_action() 
 # Chose one of the three

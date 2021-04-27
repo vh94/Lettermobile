@@ -148,6 +148,7 @@ app_ui <- function(request) {
             uiOutput('table')),
             f7Button("toggleSheet", "Layout options"),
             f7Button("mrefresh", "Print Pdf"),
+            uiOutput("pdfview"),
             shinyMobile::f7Sheet( id="Sheet",
                                   label = "More",
                                   backdrop = TRUE,
