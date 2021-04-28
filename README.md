@@ -2,6 +2,7 @@
 ShinyMobile App with Komaletter
 
 ## Dependencies:
+To install R on Ubuntu:
 in bash as root:
 
 ```bash: as root
@@ -25,7 +26,10 @@ https://cloud.r-project.org/bin/linux/ubuntu/
 Install packages using R :
 
 ``` r
-install.packages(c("tinytex","shinyMobile","komaletter","qpdf","golem"))
+install.packages(c("tinytex","shinyMobile","komaletter","qpdf","golem","devtools"))
+library(devtools)
+# install the git
+install_github("vh94/Lettermobile").
 
 ```
 warning: this will update your Tex Live installation this stack will have many dependencies, installation will be timeconsuming.
