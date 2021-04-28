@@ -6,8 +6,6 @@
 #' @noRd
 app_server <- function( input, output, session ) {
   # Your application server logic 
-  observeEvent(input$togglePopup, {f7TogglePopup(id = "pop1")})
-  observeEvent(input$togglePopup2, {f7TogglePopup(id = "pop2")})
   observeEvent(input$togglePopup3, {f7TogglePopup(id = "pop3")})
   observeEvent(input$toggleSheet, {updateF7Sheet(id = "Sheet")})
   
@@ -17,9 +15,10 @@ app_server <- function( input, output, session ) {
       df <- data.frame(Name=c(input$e1.name,input$e2.name,input$e3.name,input$e4.name,input$e5.name,input$e6.name),
                        adr1=c(input$e1.adr1,input$e2.adr1,input$e3.adr1,input$e4.adr1,input$e5.adr1,input$e6.adr1),
                        adr2=c(input$e1.adr2,input$e2.adr2,input$e3.adr2,input$e4.adr2,input$e5.adr2,input$e6.adr2),
-                       email=c(input$e1.adr2,input$e2.adr2,input$e3.adr2,input$e4.adr2,input$e5.adr2,input$e6.adr2),
-                       phone=c(input$e1.adr2,input$e2.adr2,input$e3.adr2,input$e4.adr2,input$e5.adr2,input$e6.adr2))
-      df2<- df[!apply(df == "", 1, all),] 
+                       email=c(input$e1.email,input$e2.email,input$e3.email,input$e4.email,input$e5.email,input$e6.email),
+                       phone=c(input$e1.phone,input$e2.phone,input$e3.phone,input$e4.phone,input$e5.phone,input$e6.phone))
+      df2<- df[!apply(df == "", 1, all),]
+      df2<-df2[1:input$step2,]
       return(list(df=df2, nr=nrow(df2)))
       } )
   ## output dataframe as table
@@ -45,7 +44,7 @@ app_server <- function( input, output, session ) {
                  "\ninvoice: ", Emp_Data()$df[i,6], 
                  "\nsubject: ", input$bet, 
                  "\nplace: ", input$place, 
-                 "\nopening: ",input$greets,
+                 "\nopening: ",paste(input$greet,Emp_Data()$df[i,1],","),
                  "\nclosing: ", input$closing,
                  "\nsignature: ",input$send.name,
                  "\nreturn-email: ", input$send.email,
