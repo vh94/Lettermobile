@@ -145,10 +145,13 @@ app_ui <- function(request) {
           icon = shinyMobile::f7Icon("envelope_open_fill"),
           active = TRUE,
           f7Card(
-            uiOutput('table')),
-            f7Button("toggleSheet", "Layout options"),
+            useShinyjs(),
+            uiOutput("pdfview")),
+          f7Card(
+            uiOutput('table'),
+            f7Button("toggleSheet", "Layout options")),
             f7Button("mrefresh", "Print Pdf"),
-            uiOutput("pdfview"),
+            f7DownloadButton("download","Download!"),
             shinyMobile::f7Sheet( id="Sheet",
                                   label = "More",
                                   backdrop = TRUE,
