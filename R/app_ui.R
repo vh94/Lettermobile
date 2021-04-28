@@ -31,7 +31,7 @@ app_ui <- function(request) {
             f7Text("send.name","Absender", "John Doe"),
             f7Text("send.adr1","",value = "Straße Hausnummer"),
             f7Text("send.adr2","",value = "12345 Ort"),
-            f7Text("send.email","",placeholder = "your.mail@domain.com"),
+            f7Text("send.email","",value = "your.mail@domain.com"),
             f7Text("send.phone","",value = "324 124 5564")
             )),
         ##### Second tab RECIPIENTS::
@@ -47,10 +47,10 @@ app_ui <- function(request) {
               title =shinyMobile::f7Icon("person_badge"),
               f7Block( f7Card(
                 f7Text("e1.name","Recipient 1", "John Doe"),
-                f7Text("e1.adr1","",placeholder= "Straße Hausnummer"),
-                f7Text("e1.adr2","",placeholder = "12345 Ort"),
-                f7Text("e1.email","",placeholder = "your.mail@domain.com"),
-                f7Text("e1.phone","",placeholder = "324 124 5564")
+                f7Text("e1.adr1","",value= "Straße Hausnummer"),
+                f7Text("e1.adr2","",value = "12345 Ort"),
+                f7Text("e1.email","",value = "your.mail@domain.com"),
+                f7Text("e1.phone","",value = "324 124 5564")
               )),
               open = FALSE
             ),
@@ -59,11 +59,11 @@ app_ui <- function(request) {
               id= "R1",
               title =shinyMobile::f7Icon("person_badge_plus"),
               f7Block( f7Card(
-                f7Text("e2.name","Recipient 2", placeholder="Christine Choe"),
-                f7Text("e2.adr1","",placeholder= "Straße Hausnummer"),
-                f7Text("e2.adr2","",placeholder = "12345 Ort"),
-                f7Text("e2.email","",placeholder = "your.mail@domain.com"),
-                f7Text("e2.phone","",placeholder = "324 124 5564")
+                f7Text("e2.name","Recipient 2", value="Christine Choe"),
+                f7Text("e2.adr1","",value= "Straße Hausnummer"),
+                f7Text("e2.adr2","",value = "12345 Ort"),
+                f7Text("e2.email","",value = "your.mail@domain.com"),
+                f7Text("e2.phone","",value = "324 124 5564")
               )),
               open = FALSE
             )%>% f7Skeleton(effect = "fade", duration = 5)),
@@ -72,24 +72,24 @@ app_ui <- function(request) {
                                id= "R1",
                                title =shinyMobile::f7Icon("person_badge_plus"),
                                f7Block( f7Card(
-                                 f7Text("e3.name","Recipient 2", placeholder="Christine Choe"),
-                                 f7Text("e3.adr1","",placeholder= "Straße Hausnummer"),
-                                 f7Text("e3.adr2","",placeholder = "12345 Ort"),
-                                 f7Text("e3.email","",placeholder = "your.mail@domain.com"),
-                                 f7Text("e3.phone","",placeholder = "324 124 5564")
-                               )),
+                                 f7Text("e3.name","Recipient 2", value="Christine Choe"),
+                                 f7Text("e3.adr1","",value= "Straße Hausnummer"),
+                                 f7Text("e3.adr2","",value = "12345 Ort"),
+                                 f7Text("e3.email","",value = "your.mail@domain.com"),
+                                 f7Text("e3.phone","",value = "324 124 5564")
+                               )%>% f7Skeleton(effect = "fade", duration = 5)),
                                open = FALSE
-                             )%>% f7Skeleton(effect = "fade", duration = 5)),
+                             )),
             conditionalPanel(condition = "input.step2 > 3",
             f7AccordionItem(
               id= "R2",
               title =shinyMobile::f7Icon("person_badge_plus"),
               f7Block( f7Card(
-                f7Text("e4.name","Recipient 4", placeholder="Mike Dachs"),
-                f7Text("e4.adr1","",placeholder= "Straße Hausnummer"),
-                f7Text("e4.adr2","",placeholder = "12345 Ort"),
-                f7Text("e4.email","",placeholder = "your.mail@domain.com"),
-                f7Text("e4.phone","",placeholder = "324 124 5564")
+                f7Text("e4.name","Recipient 4", value="Mike Dachs"),
+                f7Text("e4.adr1","",value= "Straße Hausnummer"),
+                f7Text("e4.adr2","",value = "12345 Ort"),
+                f7Text("e4.email","",value = "your.mail@domain.com"),
+                f7Text("e4.phone","",value = "324 124 5564")
               )),
               open = FALSE
             )%>% f7Skeleton(effect = "fade", duration = 5)),
@@ -98,11 +98,11 @@ app_ui <- function(request) {
                                id= "R2",
                                title =shinyMobile::f7Icon("person_badge_plus"),
                                f7Block( f7Card(
-                                 f7Text("e5.name","Recipient 4", placeholder="Mike Dachs"),
-                                 f7Text("e5.adr1","",placeholder= "Straße Hausnummer"),
-                                 f7Text("e5.adr2","",placeholder = "12345 Ort"),
-                                 f7Text("e5.email","",placeholder = "your.mail@domain.com"),
-                                 f7Text("e5.phone","",placeholder = "324 124 5564")
+                                 f7Text("e5.name","Recipient 4", value="Mike Dachs"),
+                                 f7Text("e5.adr1","",value= "Straße Hausnummer"),
+                                 f7Text("e5.adr2","",value = "12345 Ort"),
+                                 f7Text("e5.email","",value = "your.mail@domain.com"),
+                                 f7Text("e5.phone","",value = "324 124 5564")
                                )),
                                open = FALSE
                              )%>% f7Skeleton(effect = "fade", duration = 3.5)),
@@ -111,11 +111,11 @@ app_ui <- function(request) {
                                id= "R2",
                                title =shinyMobile::f7Icon("person_badge_plus"),
                                f7Block( f7Card(
-                                 f7Text("e6.name","Recipient 4", placeholder="Mike Dachs"),
-                                 f7Text("e6.adr1","",placeholder= "Straße Hausnummer"),
-                                 f7Text("e6.adr2","",placeholder = "12345 Ort"),
-                                 f7Text("e6.email","",placeholder = "your.mail@domain.com"),
-                                 f7Text("e6.phone","",placeholder = "324 124 5564")
+                                 f7Text("e6.name","Recipient 4", value="Mike Dachs"),
+                                 f7Text("e6.adr1","",value= "Straße Hausnummer"),
+                                 f7Text("e6.adr2","",value = "12345 Ort"),
+                                 f7Text("e6.email","",value = "your.mail@domain.com"),
+                                 f7Text("e6.phone","",value = "324 124 5564")
                                )),
                                open = FALSE)%>% f7Skeleton(effect = "fade", duration = 5))
             
@@ -127,15 +127,15 @@ app_ui <- function(request) {
           icon = shinyMobile::f7Icon("doc_text_fill"),
           active = TRUE,
         f7Block( f7Card( shinyMobile::f7DatePicker("Dt",label = "Choose Date:"),
-          shinyMobile::f7Text("sub",label="Subject:",placeholder = "Concerning"),
-          shinyMobile::f7Text("place",label="Place:",placeholder = "Mississippi"),
-          shinyMobile::f7Text("greet",label="Greeting:",placeholder = "Dear"),
-          shinyMobile::f7Text("closing",label="Closing",placeholder = "Dear")),
+          shinyMobile::f7Text("sub",label="Subject:",value = "Concerning"),
+          shinyMobile::f7Text("place",label="Place:",value = "Mississippi"),
+          shinyMobile::f7Text("greet",label="Greeting:",value = "Dear"),
+          shinyMobile::f7Text("closing",label="Closing",value = "Dear")),
           f7Button( "togglePopup3", "Letter Content")),
           shinyMobile::f7Popup(
             id = "pop3",
             title = "Write your Letter:",
-            shinyMobile::f7TextArea("lettertext",label = "Text",placeholder = "text of the letter"),
+            shinyMobile::f7TextArea("lettertext",label = "Text",value = "text of the letter"),
             swipeToClose = TRUE,
           )
           
@@ -156,7 +156,7 @@ app_ui <- function(request) {
                                   label = "More",
                                   backdrop = TRUE,
                                   f7Card(
-                                  f7Select("lco",label="Format -Standard",list("DIN5008A", "NF","SN","UScommercial9","NipponEL")),
+                                  f7Select("lco",label="Format -Standard",list("maintainersDelight.lco","DIN5008A", "NF","SN","UScommercial9","NipponEL")),
                                   f7Select("lang",label="Language",list("de","en")),
                                   f7Select("papersize",label="Papersize",choices = list("a4","letter"))
                                   ),
