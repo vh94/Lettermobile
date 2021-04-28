@@ -2,7 +2,7 @@
 ShinyMobile App with Komaletter
 
 ## Dependencies:
-in bash:
+in bash as root:
 
 ```bash: as root
 # update indices
@@ -26,7 +26,6 @@ Install packages using R :
 
 ``` r
 install.packages(c("tinytex","shinyMobile","komaletter","qpdf","golem"))
-## warning: this will update your Tex Live installation
-## this stack will have many dependencies, installation will be timeconsuming.
-```
 
+```
+warning: this will update your Tex Live installation this stack will have many dependencies, installation will be timeconsuming.
