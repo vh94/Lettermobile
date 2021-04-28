@@ -25,7 +25,7 @@ app_server <- function( input, output, session ) {
   output$table<-renderUI({f7Table(Emp_Data()$df)})
   
   ##  make an rmd file from the data and render using komaletter
-  ###     ! this should all run in \www dir : 
+  ###     ! this should all run in \www dir :  f
   observeEvent(input$mrefresh , { 
     pdfnames<-numeric(Emp_Data()$nr)
     for (i in 1:Emp_Data()$nr) {

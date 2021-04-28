@@ -120,7 +120,7 @@ app_ui <- function(request) {
                                open = FALSE)%>% f7Skeleton(effect = "fade", duration = 2))
             
           ),
-          ### input stepper number of recipients "step2"
+          ### input stepper number of recipients "step2" f
         shinyMobile::f7Stepper("step2",label =shinyMobile::f7Icon("person_crop_circle_badge_plus") ,1,6,1,1)),
         shinyMobile::f7Tab(
           tabName= "Letter Settings",
