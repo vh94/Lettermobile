@@ -2,6 +2,7 @@
 ShinyMobile App with Komaletter
 
 ## Dependencies:
+in bash:
 
 ```bash: as root
 # update indices
@@ -21,7 +22,7 @@ add-apt-repository ppa:c2d4u.team/c2d4u4.0+
 see :
 https://cloud.r-project.org/bin/linux/ubuntu/
 
-Install packages using R 
+Install packages using R :
 
 ``` r
 install.packages(c("tinytex","shinyMobile","komaletter","qpdf","golem"))
