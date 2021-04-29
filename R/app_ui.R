@@ -145,7 +145,7 @@ app_ui <- function(request) {
           icon = shinyMobile::f7Icon("envelope_open_fill"),
           active = TRUE,
           f7Card(
-            useShinyjs(),
+            actionButton("alert","Show JS alert"),
             uiOutput("pdfview")),
           f7Card(
             uiOutput('table'),
@@ -154,7 +154,8 @@ app_ui <- function(request) {
             f7Card(
             f7Button("mrefresh", "Print Pdf")),
             f7Card(
-            f7DownloadButton("download","Download!"))
+            f7DownloadButton("download","Download!")
+              )
             ),
             shinyMobile::f7Sheet( id="Sheet",
                                   label = "More",
@@ -190,11 +191,14 @@ golem_add_external_resources <- function(){
  
   tags$head(
     favicon(),
+    golem::activate_js(),
     bundle_resources(
       path = app_sys('app/www'),
       app_title = 'Lettermobile head 2'
-    )
-
+    ),
+    
+    #tags$pdf(src = "www/joined.pdf"),
+    
     ## for example, you can add shinyalert::useShinyalert() 
 
   )

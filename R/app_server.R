@@ -60,10 +60,17 @@ app_server <- function( input, output, session ) {
     }
     
     pdf_combine(pdfnames, output = "joined.pdf")
+    output$pdfview <- renderUI({
+      tags$iframe(style="height:600px; width:100%", src=system.file("www/joined.pdf", package = "golex") )
+    })
   })
-  output$pdfview <- renderUI({
-    tags$iframe(style="height:600px; width:100%", src="inst/app/www/joined.pdf")
+
+  observeEvent(input$alert,{
+    golem::invoke_js("alert","This a js alert!")
   })
+  # output$testpic<-renderImage({
+  #   
+  # })
   output$download <- downloadHandler(
     filename =  function() {
       paste(input$rec.name,input$rec.adr1, Sys.Date(), '.pdf', sep='')
