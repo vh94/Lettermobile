@@ -2,7 +2,7 @@
 #' 
 #' @param input,output,session Internal parameters for {shiny}.  
 #'     DO NOT REMOVE.
-#' @import shiny shinyMobile komaletter qpdf shinyjs
+#' @import shiny shinyMobile komaletter qpdf shinyjs base64enc
 #' @noRd
 app_server <- function( input, output, session ) {
   # Your application server logic 
@@ -60,11 +60,18 @@ app_server <- function( input, output, session ) {
     }
     
     pdf_combine(pdfnames, output = "joined.pdf")
-    output$pdfview <- renderUI({
-      tags$iframe(style="height:600px; width:100%", src=system.file("www/joined.pdf", package = "golex") )
-    })
-  })
 
+  })
+  output$pdfview <- renderUI({
+    
+    pdf_file_path <- "joined.pdf"
+    b64 <- dataURI(file = pdf_file_path, mime = "application/pdf")
+    
+    tags$iframe(
+      style = "height: 600px; width: 100%;", src = b64
+    )
+    
+  })
   observeEvent(input$alert,{
     golem::invoke_js("alert","This a js alert!")
   })
