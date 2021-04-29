@@ -17,7 +17,10 @@ app_ui <- function(request) {
       #                 iosTouchRipple = FALSE), iosTranslucentBars = FALSE,
       #                navbar = list(iosCenterTitle = TRUE,hideOnPageScroll = TRUE),
       #                toolbar = list(hideOnPageScroll = FALSE), pullToRefresh = FALSE),
-      options = list(theme="md",dark=FALSE,touch=list(iosTouchRipple = TRUE),navbar = list(iosCenterTitle = TRUE,hideOnPageScroll = TRUE)),
+      options = list(theme="md",dark=FALSE,
+                     touch=list(iosTouchRipple = TRUE),
+                     toolbar = list(hideOnPageScroll = FALSE),
+                     navbar = list(iosCenterTitle = TRUE,hideOnPageScroll = TRUE)),
       shinyMobile::f7TabLayout(
         panels = tagList(
           shinyMobile::f7Panel(side = "left", theme = "light", effect = "cover"),
@@ -149,22 +152,19 @@ app_ui <- function(request) {
           
           ),
         shinyMobile::f7Tab(
+          swipeable = TRUE,
+          animated = TRUE,
           tabName= "PDF",
           icon = shinyMobile::f7Icon("envelope_open_fill"),
           active = TRUE,
-          f7Card(
-            uiOutput("pdfview")),
-          f7Segment(
-            container = "segment",
-            rounded = TRUE,
-            f7Button("toggleTable", "Recipient List"),
-            f7Button("toggleSheet", "Layout options")),
-          f7Segment(
-            container = "segment",
-            rounded = TRUE,
-            f7Button("mrefresh", "Print Pdf"),
-            f7DownloadButton("download","Download!")
-            ),
+            uiOutput("pdfview"),
+          f7SubNavbar(
+              f7Button("toggleTable", shinyMobile::f7Icon("person_3_fill")),
+              f7Button("toggleSheet", "Layout"),
+              f7Button("mrefresh", "Print",color="green"),
+              f7DownloadButton("download","")
+              ),
+
             shinyMobile::f7Sheet( id="Sheet",
                                   label = "More",
                                   orientation = "bottom",
