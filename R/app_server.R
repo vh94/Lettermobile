@@ -8,7 +8,7 @@ app_server <- function( input, output, session ) {
   # Your application server logic 
   observeEvent(input$togglePopup3, {f7TogglePopup(id = "pop3")})
   observeEvent(input$toggleSheet, {updateF7Sheet(id = "Sheet")})
-  
+  observeEvent(input$toggleTable, {updateF7Sheet(id = "table_sheet")})
 ####  use a module! or glue
   ####   create dataframe of recipients data
   Emp_Data = reactive({
@@ -22,7 +22,7 @@ app_server <- function( input, output, session ) {
       return(list(df=df2, nr=nrow(df2)))
       } )
   ## output dataframe as table
-  output$table<-renderUI({f7Table(Emp_Data()$df)})
+  output$table<-renderUI({f7Table(Emp_Data()$df, card=FALSE)})
   
   ##  make an rmd file from the data and render using komaletter
   ###     ! this should all run in \www dir :  f
@@ -55,32 +55,38 @@ app_server <- function( input, output, session ) {
                  "\noutput: komaletter::komaletter 
 --- \n",input$lettertext),file=rmdname)
       rmarkdown::render(rmdname,"komaletter::komaletter", output_file = pdfname,envir = new.env(parent = globalenv()))
+      ## remove rmd
+      file.remove(rmdname)
+      ## remove logfile
+      file.remove(gsub(".rmd",".log",rmdname))
+      
       pdfnames[i]<-pdfname
       
     }
-    
+    ## add pdfs together
     pdf_combine(pdfnames, output = "joined.pdf")
+    ## remove .pdf
+    file.remove(pdfnames)
+    ## render pdfs using b64
+    output$pdfview <- renderUI({
+      
+      pdf_file_path <- "joined.pdf"
+      b64 <- dataURI(file = pdf_file_path, mime = "application/pdf")
+      
+      tags$iframe(
+        style = "height: 600px; width: 100%;", src = b64
+      )
+      
+    })
+  })
 
-  })
-  output$pdfview <- renderUI({
-    
-    pdf_file_path <- "joined.pdf"
-    b64 <- dataURI(file = pdf_file_path, mime = "application/pdf")
-    
-    tags$iframe(
-      style = "height: 600px; width: 100%;", src = b64
-    )
-    
-  })
   observeEvent(input$alert,{
     golem::invoke_js("alert","This a js alert!")
   })
-  # output$testpic<-renderImage({
-  #   
-  # })
+
   output$download <- downloadHandler(
     filename =  function() {
-      paste(input$rec.name,input$rec.adr1, Sys.Date(), '.pdf', sep='')
+      paste0("YourLetters",input$send.name, Sys.Date(), '.pdf', sep='')
     },
     content = function(file) {
       file.copy("joined.pdf",file)

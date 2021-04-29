@@ -10,6 +10,14 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic 
     shinyMobile::f7Page(
+      # allowPWA=FALSE,
+      # options = list(theme = c("ios", "md", "auto", "aurora"),
+      #                 dark = TRUE, filled = FALSE,color = "#007aff",
+      #                 touch = list(tapHold = TRUE, tapHoldDelay = 750,
+      #                 iosTouchRipple = FALSE), iosTranslucentBars = FALSE,
+      #                navbar = list(iosCenterTitle = TRUE,hideOnPageScroll = TRUE),
+      #                toolbar = list(hideOnPageScroll = FALSE), pullToRefresh = FALSE),
+      options = list(theme="md",dark=FALSE,touch=list(iosTouchRipple = TRUE),navbar = list(iosCenterTitle = TRUE,hideOnPageScroll = TRUE)),
       shinyMobile::f7TabLayout(
         panels = tagList(
           shinyMobile::f7Panel(side = "left", theme = "light", effect = "cover"),
@@ -145,27 +153,38 @@ app_ui <- function(request) {
           icon = shinyMobile::f7Icon("envelope_open_fill"),
           active = TRUE,
           f7Card(
-            actionButton("alert","Show JS alert"),
             uiOutput("pdfview")),
-          f7Card(
-            uiOutput('table'),
+          f7Segment(
+            container = "segment",
+            rounded = TRUE,
+            f7Button("toggleTable", "Recipient List"),
             f7Button("toggleSheet", "Layout options")),
-          f7Block(
-            f7Card(
-            f7Button("mrefresh", "Print Pdf")),
-            f7Card(
+          f7Segment(
+            container = "segment",
+            rounded = TRUE,
+            f7Button("mrefresh", "Print Pdf"),
             f7DownloadButton("download","Download!")
-              )
             ),
             shinyMobile::f7Sheet( id="Sheet",
                                   label = "More",
+                                  orientation = "bottom",
                                   backdrop = TRUE,
+                                  swipeToStep = TRUE,
                                   f7Card(
-                                  f7Select("lco",label="Format -Standard",list("maintainersDelight.lco","DIN5008A", "NF","SN","UScommercial9","NipponEL")),
+                                  f7Select("lco",label="Format -Standard",list("maintainersDelight","DIN5008A", "NF","SN","UScommercial9","NipponEL")),
                                   f7Select("lang",label="Language",list("de","en")),
                                   f7Select("papersize",label="Papersize",choices = list("a4","letter"))
                                   ),
-                                  swipeHandler = TRUE)
+                                  swipeHandler = TRUE),
+          shinyMobile::f7Sheet(id="table_sheet",
+                               swipeToStep = TRUE,
+                               swipeHandler = TRUE,
+                               label= "Recipient list:",
+                               orientation = "top",
+                               uiOutput('table')
+                               
+            
+          )
         )
         )
         
