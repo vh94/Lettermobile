@@ -6,7 +6,7 @@
 #' @noRd
 app_server <- function( input, output, session ) {
   # Your application server logic 
-  observeEvent(input$togglePopup3, {f7TogglePopup(id = "pop3")})
+  observeEvent(input$togglePopup3,{f7TogglePopup(id = "pop3")})
   observeEvent(input$toggleSheet, {updateF7Sheet(id = "Sheet")})
   observeEvent(input$toggleTable, {updateF7Sheet(id = "table_sheet")})
 ####  use a module! or glue
@@ -79,7 +79,6 @@ app_server <- function( input, output, session ) {
       
     })
   })
-
   observeEvent(input$alert,{
     golem::invoke_js("alert","This a js alert!")
   })
@@ -91,4 +90,15 @@ app_server <- function( input, output, session ) {
     content = function(file) {
       file.copy("joined.pdf",file)
     })
+  ## empfänger namen 
+  output$r2<-renderText({input$e2.name})
+  output$r3<-renderText({input$e3.name})
+  ## legals dialog
+  
+  observeEvent(input$contact,{
+    f7Dialog(
+      title = "Contacts",
+      text = "Valentin Haberl"
+    )
+  })
 }

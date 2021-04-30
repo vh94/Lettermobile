@@ -21,15 +21,22 @@ app_ui <- function(request) {
                      touch=list(iosTouchRipple = TRUE),
                      toolbar = list(hideOnPageScroll = FALSE),
                      navbar = list(iosCenterTitle = TRUE,hideOnPageScroll = TRUE)),
+      ### Navbar layout
       shinyMobile::f7TabLayout(
         panels = tagList(
-          shinyMobile::f7Panel(side = "left", theme = "light", effect = "cover"),
-          shinyMobile::f7Panel(side = "right", theme = "light", effect = "cover")),
+          shinyMobile::f7Panel(side = "right", theme = "light", effect = "cover",
+                               title="About",
+                               h3("Welcome to mobile letter"),
+                              f7Button( "contact","Contact"),
+                               "Impressum",
+                               "Datenschutz")),
           navbar= shinyMobile::f7Navbar(
             title= "A mobile Pdf Letter tool",
-            leftPanel = FALSE,
             rightPanel = TRUE
           ),
+        ### Popups für legals
+    
+        ## Tabs für Main Ui
         shinyMobile::f7Tabs(
           animated = TRUE,
           id= "tabs",
@@ -39,7 +46,7 @@ app_ui <- function(request) {
             icon = shinyMobile::f7Icon("person"),
             active = TRUE,
             f7Card(
-            f7Text("send.name","Absender", "Sandor Clegane"),
+            f7Text("send.name","Sender", "Sandor Clegane"),
             f7Text("send.adr1","",value = "Straße Hausnummer"),
             f7Text("send.adr2","",value = "12345 Ort"),
             f7Text("send.email","",value = "your.mail@domain.com"),
@@ -63,34 +70,35 @@ app_ui <- function(request) {
                 f7Text("e1.email","",value = "your.mail@domain.com"),
                 f7Text("e1.phone","",value = "324 124 5564")
               )),
-              open = FALSE
+              open = TRUE
             ),
             conditionalPanel(condition = "input.step2 > 1",
             f7AccordionItem(
               id= "R1",
-              title =shinyMobile::f7Icon("person_badge_plus"),
-              f7Block( f7Card(
+              title =tagList(shinyMobile::f7Icon("person_badge_plus"),
+                             textOutput("r2")),
+              f7Block(f7Card(
                 f7Text("e2.name","Recipient 2", value="Edda Stark"),
                 f7Text("e2.adr1","",value= "Straße Hausnummer"),
                 f7Text("e2.adr2","",value = "12345 Ort"),
                 f7Text("e2.email","",value = "your.mail@domain.com"),
                 f7Text("e2.phone","",value = "324 124 5564")
-              )),
-              open = FALSE
-            )%>% f7Skeleton(effect = "blink", duration = 3)),
+              ),open = FALSE))%>% f7Skeleton(effect = "pulse", duration = 3)),
             conditionalPanel(condition = "input.step2 > 2",
-                             f7AccordionItem(
-                               id= "R1",
-                               title =shinyMobile::f7Icon("person_badge_plus"),
-                               f7Block( f7Card(
-                                 f7Text("e3.name","Recipient 2", value="Robert Baratheon"),
+             f7AccordionItem(
+              id= "R2",
+              title =tagList(shinyMobile::f7Icon("person_badge_plus"),
+                            textOutput("r3")),
+                             
+              f7Block( f7Card(
+                                 f7Text("e3.name","Recipient 3", value="Robert Baratheon"),
                                  f7Text("e3.adr1","",value= "Straße Hausnummer"),
                                  f7Text("e3.adr2","",value = "12345 Ort"),
                                  f7Text("e3.email","",value = "your.mail@domain.com"),
                                  f7Text("e3.phone","",value = "324 124 5564")
                                )),
-                               open = FALSE
-                             )%>% f7Skeleton(effect = "fade", duration = 3)),
+                               open = TRUE
+                             ))%>% f7Skeleton(effect = "blink", duration = 3),
             conditionalPanel(condition = "input.step2 > 3",
             f7AccordionItem(
               id= "R2",
@@ -103,7 +111,7 @@ app_ui <- function(request) {
                 f7Text("e4.phone","",value = "324 124 5564")
               )),
               open = FALSE
-            )%>% f7Skeleton(effect = "fade", duration = 3)),
+            )%>% f7Skeleton(effect = "blink", duration = 3)),
             conditionalPanel(condition = "input.step2 > 4",
                              f7AccordionItem(
                                id= "R2",
@@ -114,9 +122,9 @@ app_ui <- function(request) {
                                  f7Text("e5.adr2","",value = "12345 Ort"),
                                  f7Text("e5.email","",value = "your.mail@domain.com"),
                                  f7Text("e5.phone","",value = "324 124 5564")
-                               )%>% f7Skeleton(effect = "fade", duration = 2)),
+                               )),
                                open = FALSE
-                             )),
+                             )%>% f7Skeleton(effect = "blink", duration = 3)),
             conditionalPanel(condition = "input.step2 > 5",
                              f7AccordionItem(
                                id= "R2",
@@ -128,11 +136,14 @@ app_ui <- function(request) {
                                  f7Text("e6.email","",value = "Jberg78@yahoo.com"),
                                  f7Text("e6.phone","",value = "324 124 99503456")
                                )),
-                               open = FALSE)%>% f7Skeleton(effect = "fade", duration = 2))
+                               open = FALSE)%>% f7Skeleton(effect = "blink", duration = 3))
             
           ),
           ### input stepper number of recipients "step2" f
-        shinyMobile::f7Stepper("step2",label =shinyMobile::f7Icon("person_crop_circle_badge_plus") ,1,6,1,1)),
+          div(
+          shinyMobile::f7Stepper("step2",label =shinyMobile::f7Icon("person_crop_circle_badge_plus") ,1,6,1,1)),
+          style="display:inline-block; float:right"
+        ),
         shinyMobile::f7Tab(
           tabName= "Letter Settings",
           icon = shinyMobile::f7Icon("doc_text_fill"),
