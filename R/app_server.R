@@ -22,6 +22,7 @@ app_server <- function( input, output, session ) {
       return(list(df=df2, nr=nrow(df2)))
       } )
   ## output dataframe as table
+  ## more changes to check github conf
   output$table<-renderUI({f7Table(Emp_Data()$df, card=FALSE)})
   
   ##  make an rmd file from the data and render using komaletter
