@@ -93,7 +93,7 @@ app_server <- function( input, output, session ) {
   ## empfänger namen 
   output$r2<-renderText({input$e2.name})
   output$r3<-renderText({input$e3.name})
-  ## legals dialog
+  ## legals dialog test ssh
   
   observeEvent(input$contact,{
     f7Dialog(

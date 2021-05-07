@@ -28,6 +28,7 @@ app_ui <- function(request) {
                                title="About",
                                h3("Welcome to mobile letter"),
                               f7Button( "contact","Contact"),
+                              f7Button("github",f7Icon("logo_github")),
                                "Impressum",
                                "Datenschutz")),
           navbar= shinyMobile::f7Navbar(
@@ -145,7 +146,7 @@ app_ui <- function(request) {
           style="display:inline-block; float:right"
         ),
         shinyMobile::f7Tab(
-          tabName= "Letter Settings",
+          tabName= "Content",
           icon = shinyMobile::f7Icon("doc_text_fill"),
           active = TRUE,
         f7Block( f7Card( shinyMobile::f7DatePicker("Dt",label = "Choose Date:"),
@@ -157,7 +158,7 @@ app_ui <- function(request) {
           shinyMobile::f7Popup(
             id = "pop3",
             title = "Write your Letter:",
-            shinyMobile::f7TextArea("lettertext",label = "Text",value = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."),
+            shinyMobile::f7TextArea("lettertext",label = "Text",resize= TRUE,value = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. \n \n  At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.\n \n  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."),
             swipeToClose = TRUE,
           )
           
