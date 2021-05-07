@@ -18,6 +18,15 @@ add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_relea
 apt install --no-install-recommends r-base
 # add cran repo
 add-apt-repository ppa:c2d4u.team/c2d4u4.0+
+# essential (make.. etc)
+apt install build-essential
+## networking encryption
+apt install libsodium-dev
+## 
+apt-get install libtiff-dev libjpeg-dev libpng-dev
+apt-get install libcurl4-openssl-dev libfontconfig1-dev libxml2-dev libssl-dev
+
+
 ```
 
 see :
@@ -26,10 +35,26 @@ https://cloud.r-project.org/bin/linux/ubuntu/
 Install packages using R :
 
 ``` r
-install.packages(c("tinytex","shinyMobile","komaletter","qpdf","golem","devtools"))
-library(devtools)
-# install the git
-install_github("vh94/Lettermobile").
+install.packages(c("curl","openssl","httr", "openssl", "ragg","xml2"))
+install.packages(c("tinytex","shinyMobile","komaletter","qpdf","golem","devtools"),dependecies=T)
+
+# install tinytex
+tinytex::install_tinytex()
 
 ```
 warning: this will update your Tex Live installation this stack will have many dependencies, installation will be timeconsuming.
+
+check the texlive installation:
+
+```bash
+$tex -v
+# should be TeX 3.141592653 (TeX Live 2021)
+# clone the git
+git clone https://github.com/vh94/Lettermobile ~/apps/smartletter
+
+# run 
+Rscript  ~/apps/smartletter/dev/run_dev.R
+
+sudo systemctl start shiny-server
+```
+
