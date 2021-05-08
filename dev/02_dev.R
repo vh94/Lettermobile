@@ -18,6 +18,7 @@
 usethis::use_package( "thinkr" )
 usethis::use_package("komaletter")
 usethis::use_package("base64enc")
+usethis::use_package("qpdf")
 ## Add modules ----
 ## Create a module infrastructure in R/
 golem::add_module( name = "name_of_module1" ) # Name of the module
@@ -65,7 +66,7 @@ usethis::use_github()
 
 ## Use packages ----
 usethis::use_package("shinyMobile")
-usethis::use_package("qpdf")
+#usethis::use_package("qpdf")
 # GitHub Actions
 usethis::use_github_action() 
 # Chose one of the three

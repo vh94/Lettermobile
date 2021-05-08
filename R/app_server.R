@@ -2,7 +2,7 @@
 #' 
 #' @param input,output,session Internal parameters for {shiny}.  
 #'     DO NOT REMOVE.
-#' @import shiny shinyMobile komaletter qpdf shinyjs base64enc
+#' @import shiny shinyMobile komaletter base64enc
 #' @noRd
 app_server <- function( input, output, session ) {
   # Your application server logic 
@@ -65,7 +65,7 @@ app_server <- function( input, output, session ) {
       
     }
     ## add pdfs together
-    pdf_combine(pdfnames, output = "joined.pdf")
+    qpdf::pdf_combine(pdfnames, output = "joined.pdf")
     ## remove .pdf
     file.remove(pdfnames)
     ## render pdfs using b64
