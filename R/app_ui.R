@@ -17,7 +17,7 @@ app_ui <- function(request) {
       #                 iosTouchRipple = FALSE), iosTranslucentBars = FALSE,
       #                navbar = list(iosCenterTitle = TRUE,hideOnPageScroll = TRUE),
       #                toolbar = list(hideOnPageScroll = FALSE), pullToRefresh = FALSE),
-      options = list(theme="md",dark=FALSE,
+      options = list(theme="md",dark=TRUE,
                      touch=list(iosTouchRipple = TRUE),
                      toolbar = list(hideOnPageScroll = FALSE),
                      navbar = list(iosCenterTitle = TRUE,hideOnPageScroll = TRUE)),
@@ -25,12 +25,12 @@ app_ui <- function(request) {
       shinyMobile::f7TabLayout(
         panels = tagList(
           shinyMobile::f7Panel(side = "right", theme = "light", effect = "cover",
-                               title="About",
-                               h3("Welcome to mobile letter"),
+                               title="Welcome to smartletter! ",
+                               h3("Information"),
                               f7Button( "contact","Contact"),
                               f7Button("github",f7Icon("logo_github")),
-                               "Impressum",
-                               "Datenschutz")),
+                              f7Button( "imp","Impressum"),
+                              f7Button("DS","Datenschutz"))),
           navbar= shinyMobile::f7Navbar(
             title= "A mobile Pdf Letter tool",
             rightPanel = TRUE
@@ -63,7 +63,7 @@ app_ui <- function(request) {
           shinyMobile::f7Accordion(
             id = "myaccordion1",
             f7AccordionItem(
-              title =shinyMobile::f7Icon("person_badge"),
+              title =uiOutput("e1"),
               f7Block( f7Card(
                 f7Text("e1.name","Recipient 1", "John Snow"),
                 f7Text("e1.adr1","",value= "Northern Wall 34"),
@@ -76,8 +76,7 @@ app_ui <- function(request) {
             conditionalPanel(condition = "input.step2 > 1",
             f7AccordionItem(
               id= "R1",
-              title =tagList(shinyMobile::f7Icon("person_badge_plus"),
-                             textOutput("r2")),
+              title =uiOutput("e2"),
               f7Block(f7Card(
                 f7Text("e2.name","Recipient 2", value="Edda Stark"),
                 f7Text("e2.adr1","",value= "Straße Hausnummer"),
@@ -88,8 +87,7 @@ app_ui <- function(request) {
             conditionalPanel(condition = "input.step2 > 2",
              f7AccordionItem(
               id= "R2",
-              title =tagList(shinyMobile::f7Icon("person_badge_plus"),
-                            textOutput("r3")),
+              title =uiOutput("e3"),
                              
               f7Block( f7Card(
                                  f7Text("e3.name","Recipient 3", value="Robert Baratheon"),
@@ -103,7 +101,7 @@ app_ui <- function(request) {
             conditionalPanel(condition = "input.step2 > 3",
             f7AccordionItem(
               id= "R2",
-              title =shinyMobile::f7Icon("person_badge_plus"),
+              title =uiOutput("e4"),
               f7Block( f7Card(
                 f7Text("e4.name","Recipient 4", value="Bran Stark"),
                 f7Text("e4.adr1","",value= "Straße Hausnummer"),
@@ -116,9 +114,9 @@ app_ui <- function(request) {
             conditionalPanel(condition = "input.step2 > 4",
                              f7AccordionItem(
                                id= "R2",
-                               title =shinyMobile::f7Icon("person_badge_plus"),
+                               title =uiOutput("e5"),
                                f7Block( f7Card(
-                                 f7Text("e5.name","Recipient 4", value="Tywin Lennister"),
+                                 f7Text("e5.name","Recipient 5", value="Tywin Lennister"),
                                  f7Text("e5.adr1","",value= "Straße Hausnummer"),
                                  f7Text("e5.adr2","",value = "12345 Ort"),
                                  f7Text("e5.email","",value = "your.mail@domain.com"),
@@ -129,9 +127,9 @@ app_ui <- function(request) {
             conditionalPanel(condition = "input.step2 > 5",
                              f7AccordionItem(
                                id= "R2",
-                               title =shinyMobile::f7Icon("person_badge_plus"),
+                               title =uiOutput("e6"),
                                f7Block( f7Card(
-                                 f7Text("e6.name","Recipient 4", value="Samwell Tarley"),
+                                 f7Text("e6.name","Recipient 6", value="Samwell Tarley"),
                                  f7Text("e6.adr1","",value= "Havensquare 87"),
                                  f7Text("e6.adr2","",value = "75544 Permeth"),
                                  f7Text("e6.email","",value = "Jberg78@yahoo.com"),
@@ -142,7 +140,7 @@ app_ui <- function(request) {
           ),
           ### input stepper number of recipients "step2" f
           div(
-          shinyMobile::f7Stepper("step2",label =shinyMobile::f7Icon("person_crop_circle_badge_plus") ,1,6,1,1)),
+          shinyMobile::f7Stepper("step2",label =shinyMobile::f7Icon("person_badge_plus") ,1,6,1,1)),
           style="display:inline-block; float:right"
         ),
         shinyMobile::f7Tab(

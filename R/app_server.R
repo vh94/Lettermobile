@@ -92,8 +92,44 @@ app_server <- function( input, output, session ) {
       file.copy("www/joined.pdf",file)
     })
   ## empfänger namen 
-  output$r2<-renderText({input$e2.name})
-  output$r3<-renderText({input$e3.name})
+
+  output$e1<-renderUI({
+    div(
+     h5(shinyMobile::f7Icon("person_badge"),style = "display: inline;"),
+     h5(input$e1.name,style = "display: inline;")
+    )
+  })
+
+  output$e2<-renderUI({
+    div(
+      h5(shinyMobile::f7Icon("person_badge"),style = "display: inline;"),
+      h5(input$e2.name,style = "display: inline;")
+    )
+  })
+  output$e3<-renderUI({
+    div(
+      h5(shinyMobile::f7Icon("person_badge"),style = "display: inline;"),
+      h5(input$e3.name,style = "display: inline;")
+    )
+  })
+  output$e4<-renderUI({
+    div(
+      h5(shinyMobile::f7Icon("person_badge"),style = "display: inline;"),
+      h5(input$e4.name,style = "display: inline;")
+    )
+  })
+  output$e5<-renderUI({
+    div(
+      h5(shinyMobile::f7Icon("person_badge"),style = "display: inline;"),
+      h5(input$e5.name,style = "display: inline;")
+    )
+  })
+  output$e6<-renderUI({
+    div(
+      h5(shinyMobile::f7Icon("person_badge"),style = "display: inline;"),
+      h5(input$e6.name,style = "display: inline;")
+    )
+  })
   ## legals dialog test ssh
   
   observeEvent(input$contact,{
