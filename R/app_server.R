@@ -30,7 +30,7 @@ app_server <- function( input, output, session ) {
   observeEvent(input$mrefresh , { 
     pdfnames<-numeric(Emp_Data()$nr)
     for (i in 1:Emp_Data()$nr) {
-      rmdname =gsub(" ","", x=paste0(Emp_Data()$df[i,1],Emp_Data()$df[i,3],".rmd"), fixed = TRUE)
+      rmdname =gsub(" ","", x=paste0("www/",Emp_Data()$df[i,1],Emp_Data()$df[i,3],".rmd"), fixed = TRUE)
       pdfname = gsub(" ","", x=paste0(Emp_Data()$df[i,1],Emp_Data()$df[i,3],".pdf"), fixed = TRUE)
       empty<-""
       # use a gsubregex to make the filename
@@ -61,17 +61,17 @@ app_server <- function( input, output, session ) {
       ## remove logfile
       file.remove(gsub(".rmd",".log",rmdname))
       
-      pdfnames[i]<-pdfname
+      pdfnames[i]<-paste0("www/",pdfname)
       
     }
     ## add pdfs together
-    qpdf::pdf_combine(pdfnames, output = "joined.pdf")
+    qpdf::pdf_combine(pdfnames, output = "www/joined.pdf")
     ## remove .pdf
     file.remove(pdfnames)
     ## render pdfs using b64
     output$pdfview <- renderUI({
       
-      pdf_file_path <- "joined.pdf"
+      pdf_file_path <- "www/joined.pdf"
       b64 <- dataURI(file = pdf_file_path, mime = "application/pdf")
       
       tags$iframe(
@@ -89,7 +89,7 @@ app_server <- function( input, output, session ) {
       paste0("YourLetters",input$send.name, Sys.Date(), '.pdf', sep='')
     },
     content = function(file) {
-      file.copy("joined.pdf",file)
+      file.copy("www/joined.pdf",file)
     })
   ## empfänger namen 
   output$r2<-renderText({input$e2.name})

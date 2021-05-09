@@ -10,7 +10,7 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic 
     shinyMobile::f7Page(
-      # allowPWA=FALSE,
+       allowPWA=TRUE,
       # options = list(theme = c("ios", "md", "auto", "aurora"),
       #                 dark = TRUE, filled = FALSE,color = "#007aff",
       #                 touch = list(tapHold = TRUE, tapHoldDelay = 750,
