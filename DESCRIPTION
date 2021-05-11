@@ -12,9 +12,11 @@ Imports:
     base64enc,
     config (>= 0.3.1),
     golem (>= 0.3.0),
+    htmltools,
     komaletter,
     pkgload,
     processx,
+    qpdf,
     shiny (>= 1.6.0),
     shinyMobile
 Encoding: UTF-8

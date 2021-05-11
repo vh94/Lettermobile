@@ -5,6 +5,7 @@
 #' @import shiny shinyMobile komaletter base64enc
 #' @noRd
 app_server <- function( input, output, session ) {
+  
   # Your application server logic 
   observeEvent(input$togglePopup3,{f7TogglePopup(id = "pop3")})
   observeEvent(input$toggleSheet, {updateF7Sheet(id = "Sheet")})
