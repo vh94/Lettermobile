@@ -172,6 +172,7 @@ app_ui <- function(request) {
               f7Button("toggleTable", shinyMobile::f7Icon("person_3_fill")),
               f7Button("toggleSheet", "Layout"),
               f7Button("mrefresh", "Print",color="green"),
+              f7Button("show","Prev",color="grey"),
               f7DownloadButton("download","")
               ),
 
@@ -197,13 +198,13 @@ app_ui <- function(request) {
           )
         )
         )
-        
+        # 
       )
       )
       )
   
 }
-
+# 
 #' Add external Resources to the Application
 #' 
 #' This function is internally used to add external 
