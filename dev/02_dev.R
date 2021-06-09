@@ -17,7 +17,7 @@
 ## Add one line by package you want to add as dependency
 usethis::use_package( "thinkr" )
 usethis::use_package("komaletter")
-usethis::use_package("rmarkdown")
+#usethis::use_package("rmarkdown")
 usethis::use_package("base64enc")
 usethis::use_package("qpdf")
 ## Add modules ----
