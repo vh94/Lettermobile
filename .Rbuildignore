@@ -9,3 +9,6 @@ $run_dev.*
 ^app\.R$
 ^rsconnect$
 ^README\.Rmd$
+^LICENSE\.md$
+^Dockerfile$
+^\.dockerignore$

@@ -2,7 +2,7 @@
 #' 
 #' @param input,output,session Internal parameters for {shiny}.  
 #'     DO NOT REMOVE.
-#' @import shiny shinyMobile komaletter base64enc qpdf rmarkdown
+#' @import shiny shinyMobile komaletter base64enc qpdf 
 #' @noRd
 app_server <- function( input, output, session ) {
   
@@ -29,12 +29,16 @@ app_server <- function( input, output, session ) {
   ##  make an rmd file from the data and render using komaletter
   ###     ! this should all run in \www dir :  f
   observeEvent(input$mrefresh , { 
+    # vecor for the loop
     pdfnames<-numeric(Emp_Data()$nr)
+    # loop over Recipients
     for (i in 1:Emp_Data()$nr) {
-      rmdname =gsub(" ","", x=paste0("www/",Emp_Data()$df[i,1],Emp_Data()$df[i,3],".rmd")) #, fixed = TRUE)
-      pdfname = gsub(" ","", x=paste0(Emp_Data()$df[i,1],Emp_Data()$df[i,3],".pdf")) #, fixed = TRUE)
-      # use a gsubregex to make the filename
+      # create file names 
+      rmdname =gsub(" ","", x=paste0("www/",Emp_Data()$df[i,1],Emp_Data()$df[i,3],".rmd"))
+      pdfname = gsub(" ","", x=paste0(Emp_Data()$df[i,1],Emp_Data()$df[i,3],".pdf"))
+      # create .rmd -file
       file.create(rmdname)
+      # cat Letter content to .rmd file
       cat(paste0("---\nauthor: ",input$send.name,"\nreturn-address: \n - ", input$send.adr1,"\n - ", input$send.adr2,
                  "\naddress: \n - ", Emp_Data()$df[i,1],
                  "\n - ",Emp_Data()$df[i,2],
@@ -55,21 +59,19 @@ app_server <- function( input, output, session ) {
                  "\npapersize: ", input$papersize,
                  "\noutput: komaletter::komaletter 
 --- \n",input$lettertext),file=rmdname)
-      rmarkdown::render(rmdname,"komaletter::komaletter", output_file = pdfname)  #,envir = new.env(parent = globalenv()))
-      ## remove rmd
+      # render pdf
+      rmarkdown::render(rmdname,"komaletter::komaletter", output_file = pdfname) 
+      ## remove rmd file
       file.remove(rmdname)
-      ## remove logfile
+      # remove logfile
       file.remove(gsub(".rmd",".log",rmdname))
       
       pdfnames[i]<-paste0("www/",pdfname)
       
     }
     ## add pdfs together
-    ## why not github working?????
     qpdf::pdf_combine(pdfnames, output = "www/joined.pdf")
-    ## remove .pdf
-
-   
+    ## remove single pdf files
    file.remove(pdfnames)
    
   })
@@ -79,17 +81,17 @@ observeEvent(input$show, {
       
       pdf_file_path <- "www/joined.pdf"
       b64 <- dataURI(file = pdf_file_path, mime = "application/pdf")
-      
+     
       tags$iframe(
         style = "height: 600px; width: 100%;", src = b64
       )
-      
     })
   })
+# js alert
   observeEvent(input$alert,{
     golem::invoke_js("alert","This a js alert!")
   })
-
+# download pdf
   output$download <- downloadHandler(
     filename =  function() {
       paste0(input$sub, Sys.Date(), '.pdf', sep='')
@@ -97,8 +99,8 @@ observeEvent(input$show, {
     content = function(file) {
       file.copy("www/joined.pdf",file)
     })
-  ## empfänger namen 
 
+## TODO: modularize this repetitive code:
   output$e1<-renderUI({
     div(
      h5(shinyMobile::f7Icon("person_badge"),style = "display: inline;"),
@@ -136,7 +138,7 @@ observeEvent(input$show, {
       h5(input$e6.name,style = "display: inline;")
     )
   })
-  ## legals dialog test ssh
+  ## legals dialog usw
   
   observeEvent(input$contact,{
     f7Dialog(
