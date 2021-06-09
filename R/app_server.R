@@ -31,11 +31,10 @@ app_server <- function( input, output, session ) {
   observeEvent(input$mrefresh , { 
     pdfnames<-numeric(Emp_Data()$nr)
     for (i in 1:Emp_Data()$nr) {
-      rmdname =gsub(" ","", x=paste0("www/",Emp_Data()$df[i,1],Emp_Data()$df[i,3],".rmd"), fixed = TRUE)
-      pdfname = gsub(" ","", x=paste0(Emp_Data()$df[i,1],Emp_Data()$df[i,3],".pdf"), fixed = TRUE)
-      empty<-""
+      rmdname =gsub(" ","", x=paste0("www/",Emp_Data()$df[i,1],Emp_Data()$df[i,3],".rmd")) #, fixed = TRUE)
+      pdfname = gsub(" ","", x=paste0(Emp_Data()$df[i,1],Emp_Data()$df[i,3],".pdf")) #, fixed = TRUE)
       # use a gsubregex to make the filename
-      writeBin(empty,rmdname)
+      writeBin("",rmdname)
       cat(paste0("---\nauthor: ",input$send.name,"\nreturn-address: \n - ", input$send.adr1,"\n - ", input$send.adr2,
                  "\naddress: \n - ", Emp_Data()$df[i,1],
                  "\n - ",Emp_Data()$df[i,2],
@@ -56,7 +55,7 @@ app_server <- function( input, output, session ) {
                  "\npapersize: ", input$papersize,
                  "\noutput: komaletter::komaletter 
 --- \n",input$lettertext),file=rmdname)
-      rmarkdown::render(rmdname,"komaletter::komaletter", output_file = pdfname,envir = new.env(parent = globalenv()))
+      rmarkdown::render(rmdname,"komaletter::komaletter", output_file = pdfname)  #,envir = new.env(parent = globalenv()))
       ## remove rmd
       file.remove(rmdname)
       ## remove logfile
