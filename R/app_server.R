@@ -2,7 +2,7 @@
 #' 
 #' @param input,output,session Internal parameters for {shiny}.  
 #'     DO NOT REMOVE.
-#' @import shiny shinyMobile komaletter base64enc qpdf
+#' @import shiny shinyMobile komaletter base64enc qpdf rmarkdown
 #' @noRd
 app_server <- function( input, output, session ) {
   

@@ -45,6 +45,9 @@ usethis::use_git()
 ## Use packages ----
 usethis::use_package("shinyMobile")
 usethis::use_package("qpdf")
+usethis::use_package("rmarkdown")
+usethis::use_package("komaletter")
+usethis::use_package("base64enc")
 
 ## Init Testing Infrastructure ----
 ## Create a template for tests
