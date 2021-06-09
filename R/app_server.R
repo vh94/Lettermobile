@@ -34,7 +34,7 @@ app_server <- function( input, output, session ) {
       rmdname =gsub(" ","", x=paste0("www/",Emp_Data()$df[i,1],Emp_Data()$df[i,3],".rmd")) #, fixed = TRUE)
       pdfname = gsub(" ","", x=paste0(Emp_Data()$df[i,1],Emp_Data()$df[i,3],".pdf")) #, fixed = TRUE)
       # use a gsubregex to make the filename
-      writeBin("",rmdname)
+      file.create(rmdname)
       cat(paste0("---\nauthor: ",input$send.name,"\nreturn-address: \n - ", input$send.adr1,"\n - ", input$send.adr2,
                  "\naddress: \n - ", Emp_Data()$df[i,1],
                  "\n - ",Emp_Data()$df[i,2],
@@ -43,7 +43,7 @@ app_server <- function( input, output, session ) {
                  "\ndate: ", input$Dt, 
                  "\ncustumer: ",Emp_Data()$df[i,6], 
                  "\ninvoice: ", Emp_Data()$df[i,6], 
-                 "\nsubject: ", input$bet, 
+                 "\nsubject: ", input$sub, 
                  "\nplace: ", input$place, 
                  "\nopening: ",paste(input$greet,Emp_Data()$df[i,1],","),
                  "\nclosing: ", input$closing,
@@ -65,6 +65,7 @@ app_server <- function( input, output, session ) {
       
     }
     ## add pdfs together
+    ## why not github working?????
     qpdf::pdf_combine(pdfnames, output = "www/joined.pdf")
     ## remove .pdf
 
@@ -91,7 +92,7 @@ observeEvent(input$show, {
 
   output$download <- downloadHandler(
     filename =  function() {
-      paste0("YourLetters",input$send.name, Sys.Date(), '.pdf', sep='')
+      paste0(input$sub, Sys.Date(), '.pdf', sep='')
     },
     content = function(file) {
       file.copy("www/joined.pdf",file)
