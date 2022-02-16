@@ -79,7 +79,7 @@ app_server <- function( input, output, session ) {
 observeEvent(input$show, {   
   output$pdfview <- renderUI({
       
-      pdf_file_path <- "./joined.pdf"
+      pdf_file_path <- "./app/www/joined.pdf"
       b64 <- dataURI(file = pdf_file_path, mime = "application/pdf")
      
       tags$iframe(
