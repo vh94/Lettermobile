@@ -79,7 +79,7 @@ app_server <- function( input, output, session ) {
 observeEvent(input$show, {   
   output$pdfview <- renderUI({
       
-      pdf_file_path <- "joined.pdf"
+      pdf_file_path <- "www/joined.pdf"
       b64 <- dataURI(file = pdf_file_path, mime = "application/pdf")
      
       tags$iframe(
@@ -97,7 +97,7 @@ observeEvent(input$show, {
       paste0(input$sub, Sys.Date(), '.pdf', sep='')
     },
     content = function(file) {
-      file.copy("./joined.pdf",file)
+      file.copy("./www/joined.pdf",file)
     })
 
 ## TODO: modularize this repetitive code:
