@@ -34,7 +34,7 @@ app_server <- function( input, output, session ) {
     # loop over Recipients
     for (i in 1:Emp_Data()$nr) {
       # create file names 
-      rmdname =gsub(" ","", x=paste0("www/",Emp_Data()$df[i,1],Emp_Data()$df[i,3],".rmd"))
+      rmdname =gsub(" ","", x=paste0("app/www/",Emp_Data()$df[i,1],Emp_Data()$df[i,3],".rmd"))
       pdfname = gsub(" ","", x=paste0(Emp_Data()$df[i,1],Emp_Data()$df[i,3],".pdf"))
       # create .rmd -file
       file.create(rmdname)
@@ -66,11 +66,11 @@ app_server <- function( input, output, session ) {
       # remove logfile
       file.remove(gsub(".rmd",".log",rmdname))
       
-      pdfnames[i]<-paste0("www/",pdfname)
+      pdfnames[i]<-paste0("app/www/",pdfname)
       
     }
     ## add pdfs together
-    qpdf::pdf_combine(pdfnames, output = "www/joined.pdf")
+    qpdf::pdf_combine(pdfnames, output = "app/www/joined.pdf")
     ## remove single pdf files
    file.remove(pdfnames)
    
@@ -79,7 +79,7 @@ app_server <- function( input, output, session ) {
 observeEvent(input$show, {   
   output$pdfview <- renderUI({
       
-      pdf_file_path <- "www/joined.pdf"
+      pdf_file_path <- "app/www/joined.pdf"
       b64 <- dataURI(file = pdf_file_path, mime = "application/pdf")
      
       tags$iframe(
