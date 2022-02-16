@@ -97,7 +97,7 @@ observeEvent(input$show, {
       paste0(input$sub, Sys.Date(), '.pdf', sep='')
     },
     content = function(file) {
-      file.copy("www/joined.pdf",file)
+      file.copy("app/www/joined.pdf",file)
     })
 
 ## TODO: modularize this repetitive code:
